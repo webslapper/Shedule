@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 namespace Shedule.Data;
 
 public class Repository<T> : IRepository<T> where T : class

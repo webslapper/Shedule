@@ -8,5 +8,5 @@ public class Lesson
     public DisciplineType DisciplineType { get; set; }
     public Group Group { get; set; }
     public Teacher Teacher { get; set; }
-    public string Day { get; set; }
+    public string Date { get; set; }
 }

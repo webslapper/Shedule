@@ -1,65 +1,52 @@
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Shedule.Models;
 
 namespace Shedule.Data;
-
-public class SheduleDbContext: DbContext
+public class SheduleDbContext : DbContext
 {
-    public DbSet<DisciplineType> DisciplineTypes { get; set; }
-    public DbSet<Teacher> Teachers { get; set; }
-    public DbSet<Group> Groups { get; set; }
-    public DbSet<Student> Students { get; set; }
-    public DbSet<Lesson> Lessons { get; set; }
+	public DbSet<DisciplineType> DisciplineTypes { get; set; }
+	public DbSet<Teacher> Teachers { get; set; }
+	public DbSet<Group> Groups { get; set; }
+	public DbSet<Student> Students { get; set; }
+	public DbSet<Lesson> Lessons { get; set; }
 
-    public SheduleDbContext(DbContextOptions<SheduleDbContext> options): base (options) { }
+	public SheduleDbContext(DbContextOptions<SheduleDbContext> options) : base(options) { }
 
-    public async Task SetDataAsync()
-    {
-        if (!DisciplineTypes.Any())
-        {
-            var disciplineTypesData = await File.ReadAllTextAsync("DisciplineTypes.json");
-            var disciplineTypes = JsonConvert.DeserializeObject<List<DisciplineType>>(disciplineTypesData);
-            if(disciplineTypes != null)
-            {
-                await DisciplineTypes.AddRangeAsync(disciplineTypes);
-            }
-        }
-        if (!Groups.Any())
-        {
-            var groupsData = await File.ReadAllTextAsync("Groups.json");
-            var groups = JsonConvert.DeserializeObject<List<Group>>(groupsData);
-            if (groups != null)
-            {
-                await Groups.AddRangeAsync(groups);
-            }
-        }
-        if (!Lessons.Any())
-        {
-            var lessonsData = await File.ReadAllTextAsync("Lessons.json");
-            var lessons = JsonConvert.DeserializeObject<List<Lesson>>(lessonsData);
-            if (lessons != null)
-            {
-                await Lessons.AddRangeAsync(lessons);
-            }
-        }
-        if (!Students.Any())
-        {
-            var studentsData = await File.ReadAllTextAsync("Students.json");
-            var students = JsonConvert.DeserializeObject<List<Student>>(studentsData);
-            if (students != null)
-            {
-                await Students.AddRangeAsync(students);
-            }
-        }
-        if (!Teachers.Any())
-        {
-            var teachersData = await File.ReadAllTextAsync("Teachers.json");
-            var teachers = JsonConvert.DeserializeObject<List<Teacher>>(teachersData);
-            if (teachers != null)
-            {
-                await Teachers.AddRangeAsync(teachers);
-            }
-        }
-        await SaveChangesAsync();
-    }
+	public async Task SetDataAsync(string jsonFilePath)
+	{
+		if (!File.Exists(jsonFilePath))
+		{
+			throw new FileNotFoundException($"JSON file not found: {jsonFilePath}");
+		}
+
+		var jsonData = await File.ReadAllTextAsync(jsonFilePath);
+		var dataDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
+
+		if (dataDict == null) return;
+
+		foreach (var entry in dataDict)
+		{
+			var entityType = GetType().GetProperties()
+				.FirstOrDefault(p => p.Name == entry.Key && p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>))?
+				.PropertyType.GetGenericArguments()[0];
+
+			if (entityType == null) continue;
+
+			var dbSet = GetType().GetProperty(entry.Key)?.GetValue(this);
+			var method = typeof(JsonConvert)
+				.GetMethod("DeserializeObject", new[] { typeof(string) })?
+				.MakeGenericMethod(typeof(List<>).MakeGenericType(entityType));
+
+			var entityList = method?.Invoke(null, new object[] { entry.Value.ToString()! }) as System.Collections.IEnumerable;
+
+			if (dbSet != null && entityList != null && !(dbSet as IQueryable<object>)!.Any())
+			{
+				var addRangeMethod = dbSet.GetType().GetMethod("AddRange");
+				addRangeMethod?.Invoke(dbSet, new object[] { entityList });
+			}
+		}
+
+		await SaveChangesAsync();
+	}
 }

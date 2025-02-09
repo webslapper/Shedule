@@ -1,0 +1,61 @@
+{
+	"DisciplineTypes": [
+	  { "Title": "Лекция" },
+	  { "Title": "Практика" },
+	  { "Title": "Лабораторная работа" }
+	],
+	"Groups": [
+	  {
+		"Course": "1",
+		"SpecDesc": "Информатика",
+		"SubGroup": "А",
+		"TrainDir": "Программирование"
+	  },
+	  {
+		"Course": "2",
+		"SpecDesc": "Физика",
+		"SubGroup": "Б",
+		"TrainDir": "Теоретическая Физика"
+	  }
+	],
+	"Lessons": [
+	  {
+		"StartTime": "08:00",
+		"EndTime": "09:30",
+		"Discipline": "Математический анализ",
+		"DisciplineType": { "Title": "Лекция" },
+		"Group": {
+		  "Course": "1",
+		  "SpecDesc": "Информатика",
+		  "SubGroup": "А",
+		  "TrainDir": "Программирование"
+		},
+		"Teacher": { "Name": "Иванов И.И." },
+		"Date": "2025-02-10"
+	  }
+	],
+	"Students": [
+	  {
+		"Group": {
+		  "Course": "1",
+		  "SpecDesc": "Информатика",
+		  "SubGroup": "А",
+		  "TrainDir": "Программирование"
+		},
+		"Name": "Петров П.П."
+	  },
+	  {
+		"Group": {
+		  "Course": "2",
+		  "SpecDesc": "Физика",
+		  "SubGroup": "Б",
+		  "TrainDir": "Теоретическая Физика"
+		},
+		"Name": "Сидоров С.С."
+	  }
+	],
+	"Teachers": [
+	  { "Name": "Иванов И.И." },
+	  { "Name": "Смирнов С.С." }
+	]
+  }

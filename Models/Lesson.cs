@@ -2,6 +2,8 @@ namespace Shedule.Models;
 
 public class Lesson
 {
+    public Guid Id { get; set; }
+
     public string StartTime { get; set; }
     public string EndTime { get; set; }
     public string Discipline { get; set; }

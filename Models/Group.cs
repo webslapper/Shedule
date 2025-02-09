@@ -3,7 +3,9 @@ namespace Shedule.Models;
 
 public class Group
 {
-	public string Course { get; set; }
+    public Guid Id { get; set; }
+
+    public string Course { get; set; }
 	public string SpecDesc { get; set; }
 	public string SubGroup { get; set; }
 	public string TrainDir { get; set; }

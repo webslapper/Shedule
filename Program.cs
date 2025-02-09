@@ -1,5 +1,6 @@
 using Shedule.Data;
 using Shedule.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<SheduleDbContext>(options =>
+	options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddTransient<IRepository<Lesson>, Repository<Lesson>>();
 builder.Services.AddTransient<IRepository<Group>, Repository<Group>>();
 builder.Services.AddTransient<IRepository<Teacher>, Repository<Teacher>>();
@@ -24,5 +27,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.Run();
+app.MapControllers();
+app.Run(); //InitialCreate

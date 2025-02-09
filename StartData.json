@@ -21,7 +21,7 @@
 	"Lessons": [
 	  {
 		"StartTime": "08:00",
-		"EndTime": "09:30",
+		"EndTime": "09:20",
 		"Discipline": "Математический анализ",
 		"DisciplineType": { "Title": "Лекция" },
 		"Group": {

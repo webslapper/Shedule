@@ -3,7 +3,7 @@ namespace Shedule.Models;
 
 public class Group
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = new Guid();
 
     public string Course { get; set; }
 	public string SpecDesc { get; set; }

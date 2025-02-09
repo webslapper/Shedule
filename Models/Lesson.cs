@@ -2,7 +2,7 @@ namespace Shedule.Models;
 
 public class Lesson
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = new Guid();
 
     public string StartTime { get; set; }
     public string EndTime { get; set; }

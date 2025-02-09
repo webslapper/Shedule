@@ -46,7 +46,6 @@ public class SheduleDbContext : DbContext
 				addRangeMethod?.Invoke(dbSet, new object[] { entityList });
 			}
 		}
-
 		await SaveChangesAsync();
 	}
 }

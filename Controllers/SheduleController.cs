@@ -3,7 +3,7 @@ using Shedule.Models;
 using Microsoft.AspNetCore.Mvc;
 namespace Shedule.Controllers;
 
-[Route("api/controller")]
+[Route("/")]
 public class SheduleController(IRepository<Lesson> lessonRepository) : Controller
 {
 	private readonly IRepository<Lesson> _lessonRepository = lessonRepository;

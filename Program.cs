@@ -21,7 +21,13 @@ builder.Services.AddScoped<IRepository<DisciplineType>, Repository<DisciplineTyp
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+	var dbContext = scope.ServiceProvider.GetRequiredService<SheduleDbContext>();
+
+	await dbContext.SetDataAsync();
+}
+
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();

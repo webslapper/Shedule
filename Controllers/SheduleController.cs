@@ -3,7 +3,6 @@ using Shedule.Models;
 using Microsoft.AspNetCore.Mvc;
 namespace Shedule.Controllers;
 
-[ApiController]
 [Route("api/controller")]
 public class SheduleController(IRepository<Lesson> lessonRepository) : Controller
 {

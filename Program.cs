@@ -4,19 +4,20 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+builder.Services.AddRazorPages();
+
 builder.Services.AddDbContext<SheduleDbContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddTransient<IRepository<Lesson>, Repository<Lesson>>();
-builder.Services.AddTransient<IRepository<Group>, Repository<Group>>();
-builder.Services.AddTransient<IRepository<Teacher>, Repository<Teacher>>();
-builder.Services.AddTransient<IRepository<Student>, Repository<Student>>();
-builder.Services.AddTransient<IRepository<DisciplineType>, Repository<DisciplineType>>();
+
+builder.Services.AddScoped<IRepository<Lesson>, Repository<Lesson>>();
+builder.Services.AddScoped<IRepository<Group>, Repository<Group>>();
+builder.Services.AddScoped<IRepository<Teacher>, Repository<Teacher>>();
+builder.Services.AddScoped<IRepository<Student>, Repository<Student>>();
+builder.Services.AddScoped<IRepository<DisciplineType>, Repository<DisciplineType>>();
 
 var app = builder.Build();
 
@@ -26,7 +27,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
-app.UseRouting();
 app.UseHttpsRedirection();
+app.UseRouting();
 app.MapControllers();
 app.Run();

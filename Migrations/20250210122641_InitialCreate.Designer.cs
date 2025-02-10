@@ -12,7 +12,7 @@ using Shedule.Data;
 namespace Shedule.Migrations
 {
     [DbContext(typeof(SheduleDbContext))]
-    [Migration("20250209122536_InitialCreate")]
+    [Migration("20250210122641_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

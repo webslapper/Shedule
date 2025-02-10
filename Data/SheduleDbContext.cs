@@ -12,6 +12,9 @@ public class SheduleDbContext(DbContextOptions<SheduleDbContext> options) : DbCo
 	public DbSet<Lesson> Lessons { get; set; }
 	public async Task SetDataAsync()
 	{
+		if (await DisciplineTypes.AnyAsync() || await Teachers.AnyAsync() || await Groups.AnyAsync() || await Students.AnyAsync() || await Lessons.AnyAsync())
+			return;
+
 		var jsonFilePath = "StartData.json";
 		var jsonData = await File.ReadAllTextAsync(jsonFilePath);
 
@@ -37,19 +40,21 @@ public class SheduleDbContext(DbContextOptions<SheduleDbContext> options) : DbCo
 
 			foreach (var group in data.Groups!)
 			{
-				var existingGroup = await Groups.AsNoTracking().FirstOrDefaultAsync(x => x.Id == group.Id);
+				var existingGroup = await Groups.FirstOrDefaultAsync(x => x.Id == group.Id);
 				if (existingGroup == null)
 				{
 					Groups.Add(group);
 				}
 			}
 
+			await SaveChangesAsync();
+
 			foreach (var student in data.Students!)
 			{
-				var group = await Groups.AsNoTracking().FirstOrDefaultAsync(x => x.Id == student.Group.Id);
+				var group = await Groups.FirstOrDefaultAsync(x => x.Id == student.Group.Id);
 				if (group != null)
 				{
-					var existingStudent = await Students.AsNoTracking().FirstOrDefaultAsync(x => x.Name == student.Name && x.Group.Id == student.Group.Id);
+					var existingStudent = await Students.FirstOrDefaultAsync(x => x.Name == student.Name && x.Group.Id == student.Group.Id);
 					if (existingStudent == null)
 					{
 						student.Group = group;
@@ -68,6 +73,7 @@ public class SheduleDbContext(DbContextOptions<SheduleDbContext> options) : DbCo
 				{
 					var lessonEntity = new Lesson
 					{
+						Id = lesson.Id,
 						StartTime = lesson.StartTime,
 						EndTime = lesson.EndTime,
 						Discipline = lesson.Discipline,

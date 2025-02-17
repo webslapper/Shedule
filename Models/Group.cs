@@ -9,8 +9,7 @@ public class Group
 	public string SpecDesc { get; set; }
 	public string SubGroup { get; set; }
 	public string TrainDir { get; set; }
-	//��(���)-1�
-	//���������������� ����������� (���������� ������������ �����������) - 1�
+
 	public string CreateGroupCode()
 	{
 		StringBuilder sb = new StringBuilder();

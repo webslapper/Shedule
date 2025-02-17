@@ -1,12 +1,24 @@
 @using Shedule.Models;
 
 @model Group
-<p>Cocal?</p>
-<form asp-action="GetSheduleAsync" method="post">
-	<input type="text" asp-for="SpecDesc" required />
-	<input type="text" asp-for="TrainDir" required />
-	<input type="text" asp-for="SubGroup" required />
-	<input type="text" asp-for="Course" required />
+<p>Расписание</p>
+<form asp-controller="Shedule" asp-action="GetSheduleAsync" method="post">
+	<div>
+		<label asp-for="SpecDesc">Специализация</label>
+		<input type="text" asp-for="SpecDesc" name="SpecDesc" required />
+	</div>
+	<div>
+		<label asp-for="TrainDir">Направление подготовки</label>
+		<input type="text" asp-for="TrainDir" name="TrainDir"required />
+	</div>
+	<div>
+		<label asp-for="SubGroup">Подгруппа</label>
+		<input type="text" asp-for="SubGroup" name="SubGroup" required />
+	</div>
+	<div>
+		<label asp-for="Course">Курс</label>
+		<input type="text" asp-for="Course" name="Course" required />
+	</div>
 	<button type="submit">
 		ЕБОШ РАСПИСАНИЯ
 	</button>

@@ -12,7 +12,12 @@ public class SheduleController(IRepository<Lesson> lessonRepository) : Controlle
 	[HttpPost]
 	public async Task<IActionResult> GetSheduleAsync(Group group)
 	{
-		var lessons = await _lessonRepository.GetByConditionAsync(l => l.Group == group);
+		var lessons = await _lessonRepository.GetByConditionAsync(l => 
+			l.Group.Course == group.Course &&
+			l.Group.SpecDesc == group.SpecDesc &&
+			l.Group.SubGroup == group.SubGroup &&
+			l.Group.TrainDir == group.TrainDir);
 		return View("Results", lessons);
+		
 	}
 }

@@ -19,6 +19,8 @@
                 <th>Дата</th>
                 <th>Начало занятия</th>
                 <th>Конец занятия</th>
+                <th>Предмет</th>
+                <th>Вид заниятия</th>
                 <th>Группа</th>
 				<th>Преподаватель</th>
             </tr>
@@ -30,6 +32,8 @@
                     <td>@lesson.Date</td>
                     <td>@lesson.StartTime</td>
                     <td>@lesson.EndTime</td>
+                    <td>@lesson.Discipline</td>
+                    <td>@lesson.DisciplineType.Title</td>
 					<td>@lesson.Group.CreateGroupCode()</td>
 					<td>@lesson.Teacher.Name</td>
                 </tr>

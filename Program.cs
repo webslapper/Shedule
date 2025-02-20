@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<SheduleDbContext>(options =>
-	options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+	options.UseLazyLoadingProxies().UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IRepository<Lesson>, Repository<Lesson>>();
 builder.Services.AddScoped<IRepository<Group>, Repository<Group>>();

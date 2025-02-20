@@ -4,6 +4,6 @@ public class Student
 {
     public Guid Id { get; set; } = new Guid();
 
-    public Group Group { get; set; }
+    public virtual Group? Group { get; set; }
     public string Name { get; set; }
 }

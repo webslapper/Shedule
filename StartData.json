@@ -26,7 +26,7 @@
 		"StartTime": "08:00",
 		"EndTime": "09:20",
 		"Discipline": "Математический анализ",
-		"DisciplineType": { "Id": "b1d9a8d0-1234-4a5b-bc57-efde6789a001", "Title": "Лекция" },
+		"DisciplineType": { "Id": "b1d9a8d0-1234-4a5b-bc57-efde6789a001", "Title": "(Лекция)" },
 		"Group": {
 		  "Id": "d7b16f1f-68ea-4874-9e70-28c15b63521b",
 		  "Course": "1",
@@ -35,6 +35,22 @@
 		  "TrainDir": "Программирование"
 		},
 		"Teacher": { "Id": "71db3e2e-7e10-4e74-8b3f-4b6d6e2fd2ae", "Name": "Иванов И.И." },
+		"Date": "2025-02-10"
+	  },
+	  {
+		"Id": "df2cfb4e-de71-4df0-a728-1fe1df4b5ed3",
+		"StartTime": "08:00",
+		"EndTime": "09:20",
+		"Discipline": "Физика",
+		"DisciplineType": { "Id": "b1d9a8d0-1234-4a5b-bc57-efde6789a001", "Title": "(Лекция)" },
+		"Group": {
+		  "Id": "503b7e27-1e91-4b78-9a8b-b508e7d5f9b1",
+		  "Course": "2",
+		  "SpecDesc": "Физика",
+		  "SubGroup": "Б",
+		  "TrainDir": "Теоретическая Физика"
+		},
+		"Teacher": { "Id": "a9d2b129-3d5b-4a26-97a9-0974ef8f635b", "Name": "Смирнов С.С." },
 		"Date": "2025-02-10"
 	  }
 	],

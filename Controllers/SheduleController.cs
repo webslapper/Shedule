@@ -1,22 +1,23 @@
 using Shedule.Data;
 using Shedule.Models;
 using Microsoft.AspNetCore.Mvc;
+using Shedule.Views.Shedule;
 namespace Shedule.Controllers;
 
 [Route("/")]
 public class SheduleController(IRepository<Lesson> lessonRepository) : Controller
 {
 	private readonly IRepository<Lesson> _lessonRepository = lessonRepository;
-	public IActionResult Index() => View(new Group());
+	public IActionResult Index() => View(new GroupFormModel());
 
 	[HttpPost]
-	public async Task<IActionResult> GetSheduleAsync(Group group)
+	public async Task<IActionResult> GetSheduleAsync(GroupFormModel groupFormModel)
 	{
 		var lessons = await _lessonRepository.GetByConditionAsync(l => 
-			l.Group.Course == group.Course &&
-			l.Group.SpecDesc == group.SpecDesc &&
-			l.Group.SubGroup == group.SubGroup &&
-			l.Group.TrainDir == group.TrainDir);
+			l.Group.Course == groupFormModel.SelectedCourse &&
+			l.Group.SpecDesc == groupFormModel.SelectedSpecDesc &&
+			l.Group.SubGroup == groupFormModel.SelectedSubGroup &&
+			l.Group.TrainDir == groupFormModel.SelectedTrainDir);
 		return View("Results", lessons);
 		
 	}

@@ -1,20 +1,38 @@
-# Отчет о баге
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
 
-## Заголовок
-Кнопка "Сохранить" не работает
+---
 
-## Шаги воспроизведения
-1. Перейдите на страницу редактирования профиля.
-2. Измените любое поле (например, имя).
-3. Нажмите на кнопку "Сохранить".
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-## Ожидаемый результат
-Данные должны быть сохранены, и пользователь должен видеть уведомление "Данные успешно сохранены".
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-## Фактический результат
-После нажатия кнопки появляется сообщение об ошибке, и данные не сохраняются.
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-## Дополнительная информация
-- Браузер: Chrome 94
-- OS: Windows 10
-- Скриншот: [прилагаю скриншот ошибки]
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
+
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
+
+**Additional context**
+Add any other context about the problem here.
